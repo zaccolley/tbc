@@ -1,3 +1,66 @@
-<img src="https://cloud.githubusercontent.com/assets/2591901/9236302/f9edb6c6-413b-11e5-8666-6cf8ac24eb6b.jpg" alt="zac" />
-<style>body{ margin: 0; overflow-x: hidden; background: black; } img{ width: 100%; animation: dance 1s infinite linear alternate; } @keyframes dance{ from{ transform: scale(1.25) rotate(5deg); -webkit-filter: sepia(1) blur(50px); } }</style>
-<audio src="hello.mp3" autoplay loop></audio>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>twinboyscolley</title>
+    <style>
+        body{
+            margin: 0;
+            overflow-x: hidden;
+            background: black;
+        }
+
+        img{
+            position: fixed;
+            height: 100vh;
+            width: 100vw;
+            animation: dance 1s infinite linear alternate;
+        }
+
+        @keyframes dance{
+            from{
+                transform: scale(1.25) rotate(5deg);
+                -webkit-filter: sepia(1) blur(10px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <img src="zac.jpg" alt="zac" id="zac-pic" />
+    <img src="nick.jpg" alt="nick" id="nick-pic" />
+
+    <audio src="zac.mp3" id="zac-sound" autoplay loop></audio>
+    <audio src="nick.ogg" id="nick-sound" autoplay loop></audio>
+
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script>
+
+        $(document).ready(function(){
+
+            var mouseX, mouseY;
+
+            $(document).mousemove(function(e){
+                mouseX = e.pageX;
+                mouseY = e.pageY;
+
+                var fade = mouseY / $(document).height();
+
+                console.log('zac', fade);
+                console.log('nick', 1 - fade);
+
+                document.getElementById('zac-sound').volume = fade;
+                $('#zac-pic').css('opacity', fade);
+
+                document.getElementById('nick-sound').volume = 1 - fade;
+                $('#nick-pic').css('opacity', 1 - fade);
+
+            }).mouseover(); // call the handler immediately
+
+        });
+
+    </script>
+
+</body>
+</html>
