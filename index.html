@@ -4,17 +4,38 @@
     <meta charset="UTF-8">
     <title>twinboyscolley</title>
     <style>
-        body{
+        *{
             margin: 0;
-            overflow-x: hidden;
-            background: black;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        img{
+        body{
+            background: black;
+            font-size: 10vh;
+            font-family: "Times New Roman";
+        }
+
+        .twinfaec{
+            z-index: -1;
             position: fixed;
             height: 100vh;
             width: 100vw;
             animation: dance 1s infinite linear alternate;
+        }
+
+        li{
+            list-style: none;
+        }
+
+        li:nth-child(1){
+            position: absolute;
+            top: 0; left: 0;
+        }
+
+        li:nth-child(2){
+            position: absolute;
+            bottom: 0; right: 0;
         }
 
         @keyframes dance{
@@ -23,16 +44,27 @@
                 -webkit-filter: sepia(1) blur(10px);
             }
         }
+
     </style>
 </head>
 <body>
 
-    <img src="zac.jpg" alt="zac" id="zac-pic" />
-    <img src="nick.jpg" alt="nick" id="nick-pic" />
-
+    <audio src="drums.mp3" id="drum-sound" autoplay loop></audio>
+    <audio src="guitar.mp3" id="guitar-sound" autoplay loop></audio>
     <audio src="zac.mp3" id="zac-sound" autoplay loop></audio>
     <audio src="nick.ogg" id="nick-sound" autoplay loop></audio>
 
+    <img src="zac.jpg" alt="zac" class="twinfaec" id="zac-pic" />
+    <img src="nick.jpg" alt="nick" class="twinfaec" id="nick-pic" />
+
+    <main>
+
+        <ul>
+            <li><a href="http://itsyourbirthday.today/#jason%20statham">http://itsyourbirthday.today/</a></li>
+            <li><a href="http://zaccolley.com/stuff/christmas2012/">chrissy card maker</a></li>
+        </ul>
+
+    </main>
 
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script>
@@ -45,16 +77,22 @@
                 mouseX = e.pageX;
                 mouseY = e.pageY;
 
-                var fade = mouseY / $(document).height();
+                var fadeY = mouseY / $(document).height();
+                var fadeX = mouseX / $(document).width();
 
-                console.log('zac', fade);
-                console.log('nick', 1 - fade);
+                console.log('zac', fadeY);
+                console.log('nick', 1 - fadeY);
+                console.log('drums', fadeX);
+                console.log('guitar', 1- fadeX);
 
-                document.getElementById('zac-sound').volume = fade;
-                $('#zac-pic').css('opacity', fade);
+                document.getElementById('drum-sound').volume = fadeX;
+                document.getElementById('guitar-sound').volume = 1 - fadeX;
 
-                document.getElementById('nick-sound').volume = 1 - fade;
-                $('#nick-pic').css('opacity', 1 - fade);
+                document.getElementById('zac-sound').volume = fadeY;
+                $('#zac-pic').css('opacity', fadeY);
+
+                document.getElementById('nick-sound').volume = 1 - fadeY;
+                $('#nick-pic').css('opacity', 1 - fadeY);
 
             }).mouseover(); // call the handler immediately
 
